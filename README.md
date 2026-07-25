@@ -44,7 +44,7 @@ Abre la terminal en la raíz del proyecto y ejecuta:
 mvn clean install
 
 # Arrancar el Bot
-java -jar target/Campamento-1.0-SNAPSHOT.jar
+java -jar target/Campamento-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 
 ## ☁️ Despliegue en Render
@@ -52,7 +52,7 @@ java -jar target/Campamento-1.0-SNAPSHOT.jar
 2. Crea un nuevo **Web Service** en Render conectándolo a tu repositorio.
 3. Elige Java como entorno.
 4. Comando de compilación (Build): `mvn clean install`
-5. Comando de inicio (Start): `java -jar target/Campamento-1.0-SNAPSHOT.jar`
+5. Comando de inicio (Start): `java -jar target/Campamento-1.0-SNAPSHOT-jar-with-dependencies.jar`
 6. Añade las 5 variables de entorno requeridas en el panel de configuración de Render.
 7. Registra la URL pública proporcionada por Render en **UptimeRobot** con pings cada 5 minutos.
 

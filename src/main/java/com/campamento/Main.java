@@ -61,9 +61,24 @@ public class Main {
             server.start();
             System.out.println("🌐 Servidor HTTP nativo escuchando en el puerto " + port + " (Para Render/UptimeRobot)");
             // ---------------------------------
+
+            // --- APAGADO SEGURO (GRACEFUL SHUTDOWN) ---
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                System.out.println("⚠️ Recibida señal de apagado. Cerrando conexiones...");
+                try {
+                    server.stop(0);
+                    botsApplication.close();
+                    com.campamento.config.DatabaseConfig.closePool();
+                    System.out.println("✅ Apagado seguro completado.");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }));
             
             // Mantener el hilo vivo
             Thread.currentThread().join();
+        } catch (InterruptedException e) {
+            System.out.println("⚠️ Hilo principal interrumpido. Apagando...");
         } catch (Exception e) {
             System.err.println("❌ Error crítico en el servidor del bot:");
             e.printStackTrace();
