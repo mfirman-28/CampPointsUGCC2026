@@ -51,6 +51,10 @@ public class Main {
             
             com.sun.net.httpserver.HttpServer server = com.sun.net.httpserver.HttpServer.create(new java.net.InetSocketAddress(port), 0);
             server.createContext("/", exchange -> {
+                if ("HEAD".equalsIgnoreCase(exchange.getRequestMethod())) {
+                    exchange.sendResponseHeaders(200, -1);
+                    return;
+                }
                 String response = "Bot de Campamento Activo";
                 exchange.sendResponseHeaders(200, response.getBytes().length);
                 try (java.io.OutputStream os = exchange.getResponseBody()) {
